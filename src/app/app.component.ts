@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
 
 @Component({
-  imports: [NxWelcomeComponent, RouterModule],
-  selector: 'app-root',
+  imports: [RouterModule],
+  selector: 'sportwatcher-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'SportsWatcher_ui';
+
 }

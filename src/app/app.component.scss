@@ -1,0 +1,113 @@
+.hero{
+  position: relative;
+  min-height: 100vh;
+  background-image: url('./assets/images/backgorund.jpg'); // Replace with your image path
+  background-size: 180%;
+  background-position: center;
+  background-attachment: fixed; 
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  animation: zoomInEffect 5s ease-out forwards; 
+
+  @media (max-width: 768px) {
+    background-size: cover; 
+    background-attachment: scroll; 
+    background-position: center center; 
+    animation: none; 
+    padding: 0.5rem;
+  }
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 60px;
+  z-index: 2;
+
+  @media (max-width: 768px) {
+    width: 40px;
+    top: 10px;
+    left: 10px;
+  }
+}
+
+.hero-text {
+  position: absolute;
+  top: 10%;
+  font-size: 1.5rem;
+  max-width: 600px;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  color: white;
+  z-index: 2;
+
+  span {
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem; 
+    max-width: 90%; 
+    top: 15%;
+  }
+}
+
+.cta-button {
+  position: absolute;
+  bottom: 10%;
+  background-color: #0e1a3e;
+  color: white;
+  border: 1px solid white; 
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 2;
+  visibility: hidden;
+  
+  transform: translateY(50px); 
+  animation: fadeInEffect 1s ease-out forwards; 
+  animation-delay: 5s; 
+
+  &:hover {
+    background-color: #1d2e65;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem; 
+    bottom: 5%;
+    animation-delay: 2s; 
+  }
+}
+
+// KEYFRAMES
+@keyframes zoomInEffect {
+  from {
+    background-size: 120%; 
+  }
+  to {
+    background-size: 100%; 
+  }
+}
+
+@keyframes fadeInEffect {
+  from {
+    visibility: visible;
+    opacity: 0;
+    transform: translateY(20px); 
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0); 
+  }
+}
