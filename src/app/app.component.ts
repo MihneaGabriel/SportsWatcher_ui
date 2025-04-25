@@ -1,12 +1,16 @@
-import { Component, HostListener } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import { AuthRoutes } from './routes';
 
 @Component({
-  imports: [RouterModule],
   selector: 'sportwatcher-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  standalone: false
 })
 export class AppComponent {
-
+  title = 'SportWatcher';
+  AuthRoutes = AuthRoutes;
+  constructor() {
+    console.log('AppComponent initialized');
+  }
 }
