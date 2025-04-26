@@ -11,7 +11,6 @@ import { AppRoutingModule } from "./app.routes";
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
   ],
   imports: [
     HttpClientModule,

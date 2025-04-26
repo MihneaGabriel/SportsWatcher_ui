@@ -11,7 +11,7 @@ const appRoutes: Routes = [
   },
   {
     path: PublicAppRoutes.Auth.root.path,
-    loadChildren: () => import('./modules/public/authentication/atuhentication.module').then(m => m.AuthenticationModule),
+    loadChildren: () => import('./modules/public/authentication/authentication.module').then(m => m.AuthenticationModule),
   },
   {
     path: SecuredAppRoutes.root.path,

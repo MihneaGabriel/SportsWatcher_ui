@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthRoutes } from './routes';
 
 @Component({
   selector: 'sportwatcher-root',
@@ -9,7 +8,6 @@ import { AuthRoutes } from './routes';
 })
 export class AppComponent {
   title = 'SportWatcher';
-  AuthRoutes = AuthRoutes;
   constructor() {
     console.log('AppComponent initialized');
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AuthRoutes } from 'src/app/routes';
 
 @Component({
   selector: 'app-menu',
@@ -7,4 +7,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './menu.component.scss',
   standalone: false
 })
-export class MenuComponent {}
+export class MenuComponent {
+  authRoutes = AuthRoutes;
+  
+}
