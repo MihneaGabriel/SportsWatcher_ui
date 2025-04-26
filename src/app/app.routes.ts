@@ -18,7 +18,7 @@ const appRoutes: Routes = [
     loadChildren: () => import('./modules/secured/secured-app/secured-app-module').then(m => m.SecuredAppModule),
     data: { reactToReloadRoutes: true }
   },
-  { path: '**', redirectTo: PublicAppRoutes.root.path, pathMatch: 'full' }
+  { path: '**', redirectTo: SecuredAppRoutes.root.path, pathMatch: 'full' }
 ];
 
 @NgModule({
