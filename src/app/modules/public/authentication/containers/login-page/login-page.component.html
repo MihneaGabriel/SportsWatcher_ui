@@ -20,11 +20,12 @@
         </label>
       </div>
 
+      <!-- TODO Complete the login stepp -->
       <button type="submit" class="cta-button">Sign In</button>
 
       <p class="register-link">
         Don't have an account?
-        <a routerLink="/auth/register">Create One</a>
+        <a [routerLink]="authRoutes.register.url">Create One</a>
       </p>
     </form>
   </div>

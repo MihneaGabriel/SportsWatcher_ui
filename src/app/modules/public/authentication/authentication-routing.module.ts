@@ -2,6 +2,7 @@ import { AuthRoutes as authRoutes } from "src/app/routes";
 import { LoginPageComponent } from "./containers/login-page/login-page.component";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { RegisterPageComponent } from "./containers/register-page/register-page.component";
 
 const routes: Routes = [
   {
@@ -9,7 +10,12 @@ const routes: Routes = [
     component: LoginPageComponent,
     title: authRoutes.login.name,
   },
-  // TODO Add register and fotgot password routes
+  {
+    path: authRoutes.register.path,
+    component: RegisterPageComponent,
+    title: authRoutes.register.name,
+  },
+  // TODO Add forgot password routes
 
   { path: "**", redirectTo: authRoutes.login.path, pathMatch: "full" }
 ];

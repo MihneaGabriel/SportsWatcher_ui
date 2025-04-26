@@ -1,0 +1,103 @@
+<div class="register-page-wrapper">
+  <div class="register-container">
+    <h2 class="title">Create An Account</h2>
+    <form [formGroup] = "registerForm" (ngSubmit)="save()" class="register-form">
+      <div class="form-group">
+        <label for="username" requiredLabel >Username</label>
+        <input 
+          id="username" 
+          type="text" 
+          #username 
+          formControlName="username" 
+          placeholder="username" />
+        <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.hasError('required')" class="error-message">
+          Username is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email" requiredLabel >Email</label>
+        <input 
+          id="email" 
+          type="email" 
+          #email 
+          formControlName="email" 
+          placeholder="you@example.com" />
+        <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.hasError('required')" class="error-message">
+          Email is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          id="password" 
+          [type]="passwordVisible ? 'text' : 'password'" 
+          #password 
+          formControlName="password" 
+          placeholder="••••••••" />
+        <button type="button" class="show-btn" (click)="togglePasswordVisibility()">
+          {{ passwordVisible ? 'Hide' : 'Show' }}
+        </button>
+        <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.hasError('required')" class="error-message">
+          Password is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirm-password">Re-type Password</label>
+        <input 
+          id="confirm-password" 
+          [type]="passwordVisible ? 'text' : 'password'" 
+          #confirmPassword 
+          formControlName="confirmPassword" 
+          placeholder="••••••••" />
+        <div *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.hasError('required')" class="error-message">
+          Confirm Password is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country/Region</label>
+        <select id="country">
+          <option>Romania</option>
+          <option>USA</option>
+        </select>
+      </div>
+
+      <div class="form-group checkbox-group">
+        <label><input type="checkbox" /> Send me email about promotions</label>
+       <!-- TODO Add the send email of ocnfirmation feature -->
+      </div>
+
+      <div class="form-group checkbox-group">
+        <label><input type="checkbox" formControlName="ageConfirmation" /> I am at least 18 years old</label>
+        <div *ngIf="registerForm.get('ageConfirmation')?.touched && registerForm.get('ageConfirmation')?.invalid" class="error-message">
+          You must confirm that you are at least 18 years old.
+        </div>
+      </div>
+
+      <div class="form-group checkbox-group">
+        <label><input type="checkbox" formControlName="termsAgreement" /> I agree to the Terms of Use</label>
+        <div *ngIf="registerForm.get('termsAgreement')?.touched && registerForm.get('termsAgreement')?.invalid" class="error-message">
+          You must agree to the Terms of Use.
+        </div>
+      </div>
+
+      <p class="privacy-note">
+        We take your privacy seriously. Our <a routerLink="/privacy">Privacy Policy</a> is available for your review.
+        <!-- TODO add privacy content -->
+      </p>
+
+      <div class="form-group">
+        <button type="submit" class="cta-button">Create Account</button>
+        <div class="password-mismatch-error" *ngIf="passwordMismatch">Password does not match!</div>
+      </div>
+
+      <p class="login-link">
+        Already have an account?
+        <a [routerLink]="authRoutes.login.url">Sign In</a>
+      </p>
+    </form>
+  </div>
+</div>
