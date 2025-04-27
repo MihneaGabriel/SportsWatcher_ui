@@ -1,6 +1,9 @@
+import { TmplAstSwitchBlockCase } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthRoutes } from 'src/app/routes';
+import { Nomenclature } from 'src/libs/models/nomenclator.model';
+import { NomenclatureService } from 'src/libs/services/nomenclature/nomenclature.service';
 
 @Component({
   selector: 'sportwatcher-register-page',
@@ -10,14 +13,24 @@ import { AuthRoutes } from 'src/app/routes';
 })
 export class RegisterPageComponent implements OnInit {
   registerForm!: FormGroup;
-  fb!: FormBuilder;
+  countires : string[] = [];
   passwordVisible = false;
   passwordMismatch = false;
   authRoutes = AuthRoutes;
+
+  constructor(
+    private fb: FormBuilder,
+    private nomenclature: NomenclatureService
+  ) {}
   
   async ngOnInit(){
     this.fb = new FormBuilder();
     this.registerForm = this.createRegisterForm();
+
+    this.nomenclature.getCountries().subscribe({
+      next: countries => this.countires = countries.map(country => country.value),
+      error: error => console.error('Error fetching countries:', error),
+    });
   }
 
   togglePasswordVisibility() {

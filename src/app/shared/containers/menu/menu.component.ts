@@ -9,5 +9,5 @@ import { AuthRoutes } from 'src/app/routes';
 })
 export class MenuComponent {
   authRoutes = AuthRoutes;
-  
+
 }

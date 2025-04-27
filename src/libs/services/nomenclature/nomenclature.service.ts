@@ -6,6 +6,7 @@ import { IRuntimeConfig } from "src/libs/models/runtime-config.model";
 import { RUNTIME_CONFIG } from "src/libs/utils/runtime-config.utils";
 
 
+
 @Injectable({
   providedIn: "root"
 })
@@ -16,7 +17,8 @@ export class NomenclatureService {
     @Inject(RUNTIME_CONFIG) private env: () => IRuntimeConfig,
     private htppClient: HttpClient
   ) {
-    NomenclatureService.BASE_PATH = `${this.env().apiUrl}/${NomenclatureService.BASE_PATH}`;
+    console.log('NomenclatureService env', this.env());
+    NomenclatureService.BASE_PATH = `${this.env().apiUrl}${NomenclatureService.BASE_PATH}`;
   }
 
   getCountries(): Observable<Nomenclature[]> {

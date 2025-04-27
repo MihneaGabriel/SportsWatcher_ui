@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { RUNTIME_CONFIG } from 'src/libs/utils/runtime-config.utils';
 
 @Component({
   selector: 'sportwatcher-root',
@@ -8,7 +9,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'SportWatcher';
-  constructor() {
+  constructor(@Inject(RUNTIME_CONFIG) private runtimeConfig: any) {
+    const config = this.runtimeConfig(); // Invoke the function to get the actual config
+    console.log('RUNTIME_CONFIG:', config); // Log the actual runtime config
     console.log('AppComponent initialized');
   }
 }

@@ -9,11 +9,15 @@ import { IRuntimeConfig } from "src/libs/models/runtime-config.model";
 export class RuntimeConfigService {
   private _config!: IRuntimeConfig;
   get config(): IRuntimeConfig {
+    if (!this._config) {
+      throw new Error('Runtime configuration is not loaded yet.');
+    }
     return this._config;
   }
 
-  private configLoadedSubkject = new ReplaySubject<boolean>(1);
-  configLoaded$ = this.configLoadedSubkject.asObservable();
+
+  private configLoadedSubject = new ReplaySubject<boolean>(1);
+  configLoaded$ = this.configLoadedSubject.asObservable();
 
   private httpClient: HttpClient; 
 
@@ -31,13 +35,12 @@ export class RuntimeConfigService {
         this.httpClient.get<IRuntimeConfig>(url).pipe(
           tap((config: IRuntimeConfig) => {
             this._config = config;
-            this.configLoadedSubkject.next(true);
+            this.configLoadedSubject.next(true);
           })
         )
       );
     } catch (error) {
       console.error("Error loading runtime config:", error);
-      this.configLoadedSubkject.next(false);
     }
   }
 }

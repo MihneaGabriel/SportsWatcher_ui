@@ -1,6 +1,6 @@
 import { EnvironmentInjector, inject, runInInjectionContext } from "@angular/core";
-import { Router } from "@angular/router"; // <-- typo was "@angluar"
-import { AuthService } from '../libs/services/auth/auth.service'; // Make sure this path is correct
+import { Router } from "@angular/router"; 
+import { AuthService } from '../libs/services/auth/auth.service'; 
 
 export function subscribeToReloadRoutesEvent(injector: EnvironmentInjector): void {
   runInInjectionContext(injector, () => {
