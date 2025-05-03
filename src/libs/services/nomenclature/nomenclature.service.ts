@@ -5,8 +5,6 @@ import { Nomenclature } from "src/libs/models/nomenclator.model";
 import { IRuntimeConfig } from "src/libs/models/runtime-config.model";
 import { RUNTIME_CONFIG } from "src/libs/utils/runtime-config.utils";
 
-
-
 @Injectable({
   providedIn: "root"
 })
@@ -15,13 +13,13 @@ export class NomenclatureService {
 
   constructor(
     @Inject(RUNTIME_CONFIG) private env: () => IRuntimeConfig,
-    private htppClient: HttpClient
+    private httpClient: HttpClient
   ) {
     NomenclatureService.BASE_PATH = `${this.env().apiUrl}${NomenclatureService.BASE_PATH}`;
   }
 
   getCountries(): Observable<Nomenclature[]> {
-    return this.htppClient.get<Nomenclature[]>(`${NomenclatureService.BASE_PATH}/GetAllCountries`).pipe(
+    return this.httpClient.get<Nomenclature[]>(`${NomenclatureService.BASE_PATH}/GetAllCountries`).pipe(
       catchError( () => of([] as Nomenclature[]) )
     )
   }

@@ -4,6 +4,9 @@ import { lastValueFrom } from 'rxjs';
 import { AuthRoutes } from 'src/app/routes';
 import { Nomenclature } from 'src/libs/models/nomenclator.model';
 import { NomenclatureService } from 'src/libs/services/nomenclature/nomenclature.service';
+import { RegisterForm } from '../models/register.model';
+import { RegisterService } from 'src/app/shared/services/register.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'sportwatcher-register-page',
@@ -19,8 +22,10 @@ export class RegisterPageComponent implements OnInit {
   authRoutes = AuthRoutes;
 
   constructor(
+    private router: Router,
     private fb: FormBuilder,
-    private nomenclatureService: NomenclatureService
+    private nomenclatureService: NomenclatureService,
+    private registerService: RegisterService
   ) {}
   
   async ngOnInit(){
@@ -41,10 +46,19 @@ export class RegisterPageComponent implements OnInit {
       return;
     } else { this.passwordMismatch = false; }
  
-    console.log('Form submitted:', this.registerForm?.getRawValue());
     if (this.registerForm.valid) {
-      console.log('Form submitted VALID:', this.registerForm?.getRawValue());
+      this.registerService.createAccount(this.registerForm.getRawValue()).subscribe({
+        next: (response: RegisterForm) => {
+          console.log('Account created successfully:', response);
+          this.router.navigate([this.authRoutes.login]);
+        },
+        error: (error: any) => {
+          console.error('Error creating account:', error);
+            alert('An error occurred while creating the account. Please try again later.');
+        }
+      });
     }
+
   }
 
   createRegisterForm() {
