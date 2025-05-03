@@ -17,7 +17,6 @@ export class NomenclatureService {
     @Inject(RUNTIME_CONFIG) private env: () => IRuntimeConfig,
     private htppClient: HttpClient
   ) {
-    console.log('NomenclatureService env', this.env());
     NomenclatureService.BASE_PATH = `${this.env().apiUrl}${NomenclatureService.BASE_PATH}`;
   }
 

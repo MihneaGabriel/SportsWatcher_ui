@@ -1,6 +1,6 @@
-import { TmplAstSwitchBlockCase } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { lastValueFrom } from 'rxjs';
 import { AuthRoutes } from 'src/app/routes';
 import { Nomenclature } from 'src/libs/models/nomenclator.model';
 import { NomenclatureService } from 'src/libs/services/nomenclature/nomenclature.service';
@@ -13,35 +13,26 @@ import { NomenclatureService } from 'src/libs/services/nomenclature/nomenclature
 })
 export class RegisterPageComponent implements OnInit {
   registerForm!: FormGroup;
-  countires : string[] = [];
+  countries : Nomenclature[] = [];
   passwordVisible = false;
   passwordMismatch = false;
   authRoutes = AuthRoutes;
 
   constructor(
     private fb: FormBuilder,
-    private nomenclature: NomenclatureService
+    private nomenclatureService: NomenclatureService
   ) {}
   
   async ngOnInit(){
     this.fb = new FormBuilder();
     this.registerForm = this.createRegisterForm();
 
-    this.nomenclature.getCountries().subscribe({
-      next: countries => this.countires = countries.map(country => country.value),
-      error: error => console.error('Error fetching countries:', error),
-    });
+    this.countries = await lastValueFrom(this.nomenclatureService.getCountries());
   }
 
   togglePasswordVisibility() {
     this.passwordVisible = !this.passwordVisible;
   }
-
-  // ngDoCheck() {
-  //   this.registerForm.valueChanges.subscribe((value) => {
-  //     console.log('Form changes:', value);
-  //   });
-  // }
 
   save() {
     this.registerForm.markAllAsTouched();
@@ -52,7 +43,7 @@ export class RegisterPageComponent implements OnInit {
  
     console.log('Form submitted:', this.registerForm?.getRawValue());
     if (this.registerForm.valid) {
-      console.log('Form submitted:', this.registerForm?.getRawValue());
+      console.log('Form submitted VALID:', this.registerForm?.getRawValue());
     }
   }
 
@@ -62,7 +53,7 @@ export class RegisterPageComponent implements OnInit {
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required]),
       confirmPassword: new FormControl(null, [Validators.required]),
-      region: new FormControl(null, [Validators.required]),
+      country: new FormControl(null, [Validators.required]),
       promotions: new FormControl(false),
       termsAgreement: new FormControl(false, [Validators.requiredTrue]),
       ageConfirmation: new FormControl(false, [Validators.requiredTrue]),

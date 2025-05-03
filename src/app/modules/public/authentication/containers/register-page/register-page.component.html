@@ -59,15 +59,19 @@
 
       <div class="form-group">
         <label for="country">Country/Region</label>
-        <select id="country">
-          <option>Romania</option>
-          <option>USA</option>
+        <select id="country" formControlName="country">
+          <option value="" disabled selected>Select your country</option>
+          <option 
+            *ngFor="let country of countries" 
+            [value]="country.value">
+            {{ country.value }}
+          </option>
         </select>
       </div>
 
       <div class="form-group checkbox-group">
         <label><input type="checkbox" /> Send me email about promotions</label>
-       <!-- TODO Add the send email of ocnfirmation feature -->
+       <!-- TODO Add the send email of confirmation feature -->
       </div>
 
       <div class="form-group checkbox-group">

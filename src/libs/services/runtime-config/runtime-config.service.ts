@@ -15,7 +15,6 @@ export class RuntimeConfigService {
     return this._config;
   }
 
-
   private configLoadedSubject = new ReplaySubject<boolean>(1);
   configLoaded$ = this.configLoadedSubject.asObservable();
 
