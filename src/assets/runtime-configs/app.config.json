@@ -1,0 +1,6 @@
+{
+  "appVersion": "1.0.0",
+  "environment": "development",
+  "clinetId": "SportsWatcher",
+  "apiUrl": "https://localhost:7180/api/"
+}

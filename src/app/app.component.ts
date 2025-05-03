@@ -1,12 +1,15 @@
-import { Component, HostListener } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, Inject } from '@angular/core';
+import { RUNTIME_CONFIG } from 'src/libs/utils/runtime-config.utils';
 
 @Component({
-  imports: [RouterModule],
   selector: 'sportwatcher-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  standalone: false
 })
 export class AppComponent {
-
+  title = 'SportWatcher';
+  constructor(@Inject(RUNTIME_CONFIG) private runtimeConfig: any) {
+    const config = this.runtimeConfig(); // Invoke the function to get the actual config
+  }
 }

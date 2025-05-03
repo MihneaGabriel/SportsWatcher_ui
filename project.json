@@ -25,10 +25,11 @@
           },
           {
             "glob": "**/*",
-            "input": "src/app/assets",
+            "input": "src/assets",
             "output": "assets"
           }
         ],
+
         "styles": ["./src/styles.scss"],
         "scripts": []
       },
