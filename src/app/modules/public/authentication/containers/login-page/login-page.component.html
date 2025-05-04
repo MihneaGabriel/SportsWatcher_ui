@@ -1,18 +1,40 @@
 <div class="login-page-wrapper">
   <div class="login-container">
     <h2 class="login-title">Sign In</h2>
-    <form class="login-form">
+    <form [formGroup]="loginForm" (ngSubmit)="submit()" class="login-form">
       <div class="form-group">
-        <label for="email">Email Address *</label>
-        <input id="email" type="email" placeholder="you@example.com" />
+        <label for="email" requiredLabel >Email</label>
+        <input 
+          id="email" 
+          type="email" 
+          #email 
+          formControlName="email" 
+          placeholder="you@example.com" />
+        <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.hasError('required')" class="error-message">
+          Email is required.
+        </div>
+        <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.hasError('email')" class="error-message">
+          Please enter a valid email address.
+        </div>
       </div>
 
       <div class="form-group">
-        <label for="password">Password *</label>
-        <input id="password" type="password" placeholder="••••••••" />
-        <a class="forgot-link" routerLink="/auth/reset-password">Forgot Password?</a>
+        <label for="password">Password</label>
+        <input 
+          id="password" 
+          [type]="passwordVisible ? 'text' : 'password'" 
+          #password 
+          formControlName="password" 
+          placeholder="••••••••" />
+        <button type="button" class="show-btn" (click)="togglePasswordVisibility()">
+          {{ passwordVisible ? 'Hide' : 'Show' }}
+        </button>
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')" class="error-message">
+          Password is required.
+        </div>
       </div>
 
+      <!-- TODO Make that work -->
       <div class="options">
         <label class="checkbox-label">
           <input type="checkbox" />
@@ -21,7 +43,13 @@
       </div>
 
       <!-- TODO Complete the login stepp -->
-      <button type="submit" class="cta-button">Sign In</button>
+      <div class="form-group">
+        <button type="submit" class="cta-button">Sign In</button>
+        <div *ngIf="errorMessage" class="mismatch-error">
+          {{ errorMessage }}
+        </div>
+      </div>
+
 
       <p class="register-link">
         Don't have an account?

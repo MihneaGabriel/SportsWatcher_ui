@@ -58,7 +58,6 @@ export class RegisterPageComponent implements OnInit {
         }
       });
     }
-
   }
 
   createRegisterForm() {
