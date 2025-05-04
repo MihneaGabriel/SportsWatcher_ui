@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthRoutes, SecuredAppRoutes } from 'src/app/routes';
-import { LoginService } from 'src/app/shared/services/login.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private loginService: LoginService,
+    private loginService: AuthenticationService,
     private router: Router
   ) {}
 
@@ -41,7 +41,7 @@ export class LoginPageComponent implements OnInit {
         next: (response) => {
           console.log('Login successful:', response);
             // Navigate to the secured app route on successful login
-            this.router.navigate(['Home']);
+            this.router.navigate([this.homeRoutes.Home.root.url]);
         },
         error: (err) => {
           this.errorMessage = err.message;
