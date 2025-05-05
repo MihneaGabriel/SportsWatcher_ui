@@ -111,6 +111,17 @@
       }
     }
 
+    .show-btn {
+      position: absolute;
+      top: 32px;
+      right: 8px;
+      background: none;
+      border: none;
+      color: #0e1a3e;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
     .register-link {
       text-align: center;
       font-size: 0.85rem;
@@ -120,6 +131,24 @@
         color: #ffd700;
         text-decoration: underline;
       }
+    }
+
+    .error-message {
+      font-size: 0.65rem;
+      color: #ff4d4f;
+      margin-top: 0.25rem;
+      text-align: left;
+      position: absolute;
+      bottom: -0.85rem;
+      left: 0;
+      width: 100%;
+    }
+
+    .mismatch-error {
+      font-size: 0.75rem;
+      color: #ff4d4f;
+      margin-top: 1rem;
+      text-align: center;
     }
   }
 }
