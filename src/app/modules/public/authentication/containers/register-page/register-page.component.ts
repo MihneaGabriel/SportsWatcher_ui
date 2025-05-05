@@ -5,8 +5,8 @@ import { AuthRoutes } from 'src/app/routes';
 import { Nomenclature } from 'src/libs/models/nomenclator.model';
 import { NomenclatureService } from 'src/libs/services/nomenclature/nomenclature.service';
 import { RegisterForm } from '../models/register.model';
-import { RegisterService } from 'src/app/shared/services/register.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 @Component({
   selector: 'sportwatcher-register-page',
@@ -25,7 +25,7 @@ export class RegisterPageComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private nomenclatureService: NomenclatureService,
-    private registerService: RegisterService
+    private registerService: AuthenticationService
   ) {}
   
   async ngOnInit(){
@@ -47,7 +47,7 @@ export class RegisterPageComponent implements OnInit {
     } else { this.passwordMismatch = false; }
  
     if (this.registerForm.valid) {
-      this.registerService.createAccount(this.registerForm.getRawValue()).subscribe({
+      this.registerService.register(this.registerForm.getRawValue()).subscribe({
         next: (response: RegisterForm) => {
           console.log('Account created successfully:', response);
           this.router.navigate([this.authRoutes.login]);
@@ -58,7 +58,6 @@ export class RegisterPageComponent implements OnInit {
         }
       });
     }
-
   }
 
   createRegisterForm() {

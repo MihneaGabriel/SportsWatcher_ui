@@ -1,7 +1,7 @@
 <div class="register-page-wrapper">
   <div class="register-container">
     <h2 class="title">Create An Account</h2>
-    <form [formGroup] = "registerForm" (ngSubmit)="save()" class="register-form">
+    <form [formGroup]="registerForm" (ngSubmit)="save()" class="register-form">
       <div class="form-group">
         <label for="username" requiredLabel >Username</label>
         <input 
