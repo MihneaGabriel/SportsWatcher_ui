@@ -40,16 +40,17 @@
           <input type="checkbox" />
           Remember me
         </label>
+        <p class="forgot-link">
+          <a [routerLink]="authRoutes.resetPassword.url">Forgot password?</a>
+        </p>
       </div>
 
-      <!-- TODO Complete the login stepp -->
       <div class="form-group">
         <button type="submit" class="cta-button">Sign In</button>
         <div *ngIf="errorMessage" class="mismatch-error">
           {{ errorMessage }}
         </div>
       </div>
-
 
       <p class="register-link">
         Don't have an account?

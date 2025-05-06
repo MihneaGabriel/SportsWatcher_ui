@@ -3,6 +3,7 @@ import { LoginPageComponent } from "./containers/login-page/login-page.component
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { RegisterPageComponent } from "./containers/register-page/register-page.component";
+import { ForgotPasswordPageComponent } from "./containers/forgot-password-page/forgot-password-page.component";
 
 const routes: Routes = [
   {
@@ -15,7 +16,11 @@ const routes: Routes = [
     component: RegisterPageComponent,
     title: authRoutes.register.name,
   },
-  // TODO Add forgot password routes
+  {
+    path: authRoutes.resetPassword.path,
+    component: ForgotPasswordPageComponent,
+    title: authRoutes.resetPassword.name,
+  },
 
   { path: "**", redirectTo: authRoutes.login.path, pathMatch: "full" }
 ];
