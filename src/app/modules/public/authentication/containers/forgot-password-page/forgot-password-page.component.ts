@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthRoutes } from 'src/app/routes';
 import emailjs from 'emailjs-com';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-forgot-password-page',
@@ -18,6 +20,7 @@ export class ForgotPasswordPageComponent implements OnInit {
   constructor (
     private router: Router,
     private fb: FormBuilder,
+    private resetPasswordService: AuthenticationService,
   ) {}
 
   async ngOnInit(){
@@ -25,15 +28,17 @@ export class ForgotPasswordPageComponent implements OnInit {
     this.resetPasswordForm = this.resetPassword()
   }
 
-  submit() {
+  async submit() {
     this.resetPasswordForm.markAllAsTouched();
     emailjs.init('Nvr0JDhl_vDM7I_ij')
     const email = this.resetPasswordForm.get('email')?.value;
 
     if (email) {
+      const tempPassword = await lastValueFrom(this.resetPasswordService.resetPassword(email));
+      
       emailjs.send("service_c7amez5", "template_zsdch77", {
         email: email,
-        tempPassword: 1234, //TODO Need to add a generatePasswordservice
+        tempPassword: tempPassword
       }).then(() => {
         console.log('Email sent successfully');
         this.router.navigate([this.authRoutes.login]);

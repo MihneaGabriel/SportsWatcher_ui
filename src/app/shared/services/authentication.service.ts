@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
-import { BehaviorSubject, catchError, Observable, of, Subject, throwError } from "rxjs";
+import { BehaviorSubject, catchError, map, Observable, of, Subject, throwError } from "rxjs";
 import { LoginForm } from "src/app/modules/public/authentication/containers/models/login.model";
 import { RegisterForm } from "src/app/modules/public/authentication/containers/models/register.model";
 import { IRuntimeConfig } from "src/libs/models/runtime-config.model";
@@ -46,22 +46,20 @@ export class AuthenticationService {
     );
   }
 
-    //Nuked
-  // logout(): void {
-  //   localStorage.removeItem('access_token');
-  //   this.isAuthenticatedSubject.next(false);
-  //   this.triggerReloadRoutes();
-  // }
+  resetPassword(email : string): Observable<string> {
+    return this.httpClient.put<{ tempPassword: string }>(`${AuthenticationService.BASE_PATH}/ResetUserPassword`,{ email }).pipe(      
+      map(response => response.tempPassword), 
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Failed to reset password.';
+        
+        if (error.status === 404) {
+          errorMessage = 'Email not found.';
+        } else if (error.status === 0) {
+          errorMessage = 'Server is unreachable.';
+        }
+        return throwError(() => new Error(errorMessage));
+      })
+    );
+  }
 
-  // triggerReloadRoutes(): void {
-  //   this.reloadRoutesSubject.next();
-  // }
-
-  // getToken(): string | null {
-  //   return localStorage.getItem('access_token');
-  // }
-
-  // isLoggedIn(): boolean {
-  //   return !!this.getToken();
-  // }
 }
