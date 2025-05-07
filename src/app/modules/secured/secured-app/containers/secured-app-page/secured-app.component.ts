@@ -12,4 +12,5 @@ export class SecuredAppComponent {
   handleRouteActivation(component) {
     this.appComponent?.captureChildData(component);
   }
+  
 }

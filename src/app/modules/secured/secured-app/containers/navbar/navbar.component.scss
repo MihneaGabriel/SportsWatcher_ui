@@ -16,3 +16,25 @@
     cursor: pointer;
   }
 }
+
+.toggle-btn {
+  position: absolute;
+  top: 25px;
+  right: 50px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+}
+
+.toggle-btn:hover {
+  color: #b0b0b0; 
+}
+
+@media (max-width: 768px) {
+  
+  .toggle-btn {
+    display: none;
+  }
+}
