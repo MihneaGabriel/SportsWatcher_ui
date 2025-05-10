@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
-import { DropzoneData } from '../models/dropzone.model';
+import { DropzoneData } from '../../models/dropzone.model';
 
 @Component({
   selector: 'app-dropzone',

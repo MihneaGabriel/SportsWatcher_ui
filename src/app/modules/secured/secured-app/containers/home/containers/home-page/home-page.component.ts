@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { SidebarService } from 'src/app/shared/services/sidebar.service';
-import { DropzoneData } from '../../../models/dropzone.model';
+import { DropzoneData } from '../../models/dropzone.model';
 import { MatDialog } from '@angular/material/dialog';
-import { ImportModalComponent } from '../../../import-modal/import-modal.component';
+import { ImportModalComponent } from '../../components/import-modal/import-modal.component';
 
 @Component({
   selector: 'app-home-page',
