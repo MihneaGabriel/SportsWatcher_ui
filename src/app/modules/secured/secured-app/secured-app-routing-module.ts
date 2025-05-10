@@ -15,7 +15,7 @@ const routes = () => [
         .when((r) => checkForPermissionOrRoles(r.roles, r.permissions))
         .define((r) => ({ 
           path:  r.path, 
-          loadChildren: () => import('../home/home.module').then(m => m.HomeModule),
+          loadChildren: () => import('./containers/home/home.module').then(m => m.HomeModule),
         })),
 
         // Decooment this when you have homepage
