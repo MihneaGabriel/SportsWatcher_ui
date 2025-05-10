@@ -18,7 +18,6 @@ const routes = () => [
           loadChildren: () => import('./containers/home/home.module').then(m => m.HomeModule),
         })),
 
-        // Decooment this when you have homepage
       on('**')
       .when(() => true)
       .define(() => ({

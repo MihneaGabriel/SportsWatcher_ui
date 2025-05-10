@@ -1,3 +1,4 @@
 export * from './navbar/navbar.component'
 export * from './sidebar/sidebar.component'
 export * from './drawer/drawer.component'
+export * from './dropzone/dropzone.component'

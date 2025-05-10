@@ -11,7 +11,7 @@ import { DrawerComponent } from "./containers";
     SecuredAppComponent,
     NavbarComponent,
     SidebarComponent,
-    DrawerComponent
+    DrawerComponent,
   ],
   imports: [
     CommonModule,
