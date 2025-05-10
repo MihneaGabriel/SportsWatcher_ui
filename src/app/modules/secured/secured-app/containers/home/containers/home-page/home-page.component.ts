@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { SidebarService } from 'src/app/shared/services/sidebar.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { SidebarService } from 'src/app/shared/services/sidebar.service';
 export class HomePageComponent implements OnInit {
   isSidebarOpen = false;
 
-  constructor(private sidebarService: SidebarService) {}
+  constructor(private sidebarService: SidebarService ) {}
 
   ngOnInit() {
     this.sidebarService.isOpen$.subscribe(state => {

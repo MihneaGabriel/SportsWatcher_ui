@@ -3,7 +3,7 @@ export interface RegisterForm {
   email: string;
   password: string;
   confirmPassword: string;
-  region: string;
+  country: string;
   promotions: boolean;
   termsAgreement: boolean;
   ageConfirmation: boolean;

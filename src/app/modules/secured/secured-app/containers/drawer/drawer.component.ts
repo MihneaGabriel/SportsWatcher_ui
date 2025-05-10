@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { DrawerService } from 'src/app/shared/services/drawer.service';
 
 @Component({
@@ -8,13 +9,20 @@ import { DrawerService } from 'src/app/shared/services/drawer.service';
   standalone: false,
 })
 export class DrawerComponent implements OnInit {
+  username: string;
   isDrawerOpen = false;
 
-  constructor( private drawerService: DrawerService ) {}
+
+  constructor( 
+    private drawerService: DrawerService,
+    private userService: AuthenticationService
+   ) {}
   
   ngOnInit() {
     this.drawerService.isOpen$.subscribe( state => {
       this.isDrawerOpen = state;
     })
+
+    this.username = localStorage.getItem('username');
   }
 }
