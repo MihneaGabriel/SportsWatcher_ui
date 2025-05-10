@@ -1,4 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { DropzoneData } from '../models/dropzone.model';
 
 @Component({
   selector: 'app-dropzone',
@@ -8,6 +9,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 })
 export class DropzoneComponent {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  @Output() dropzoneData = new EventEmitter<DropzoneData>();
 
   isDragging = false;
   fileName: string | null = null;
@@ -40,10 +42,20 @@ export class DropzoneComponent {
   handleFile(file: File | undefined) {
     if (file && file.name.endsWith('.csv')) {
       this.fileName = file.name;
-      console.log(this.fileName)
-      //TODO Handle the CSV file (e.g., parse or upload)
+
+      const data: DropzoneData = {
+        fileName: file,
+        isValid: true
+      };
+      this.dropzoneData.emit(data);
     } else {
       this.fileName = null;
+
+      const data: DropzoneData = {
+        fileName: null,
+        isValid: false
+      };
+      this.dropzoneData.emit(data);
       this.errorMessage = 'Only CSV files are allowed.';
     }
   }
