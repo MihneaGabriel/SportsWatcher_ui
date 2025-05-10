@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SidebarService } from 'src/app/shared/services/sidebar.service';
 
 @Component({
   selector: 'app-home-page',
@@ -6,8 +7,14 @@ import { Component } from '@angular/core';
   styleUrl: './home-page.component.scss',
   standalone: false,
 })
-export class HomePageComponent {
-  ngOnInit(): void {
-    console.log('HomePageComponent initialized');
+export class HomePageComponent implements OnInit {
+  isSidebarOpen = false;
+
+  constructor(private sidebarService: SidebarService) {}
+
+  ngOnInit() {
+    this.sidebarService.isOpen$.subscribe(state => {
+      this.isSidebarOpen = state;
+    });
   }
 }

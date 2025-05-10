@@ -5,8 +5,11 @@
     <button class="toggle-btn" (click)="toggleSidebar()">
       <i class="fas" [ngClass]="sidebar.isOpen ? 'fa-minus' : 'fa-bars'"></i> 
     </button>
-    <i class="fas fa-user"></i>
+    <button class="toggle-drawer-btn" (click)="toggleDrawer()" >
+      <i class="fas fa-user"></i>
+    </button>
   </div>
 
   <app-sidebar #sidebar></app-sidebar>
+  <app-drawer #drawer> </app-drawer>
 </nav>

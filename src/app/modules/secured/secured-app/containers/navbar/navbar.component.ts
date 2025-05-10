@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DrawerService } from 'src/app/shared/services/drawer.service';
 import { SidebarService } from 'src/app/shared/services/sidebar.service';
 
 @Component({
@@ -8,7 +9,10 @@ import { SidebarService } from 'src/app/shared/services/sidebar.service';
   standalone: false,
 })
 export class NavbarComponent implements OnInit {
-  constructor( private sidebarService : SidebarService) {}
+  constructor( 
+    private sidebarService : SidebarService,
+    private drawerService: DrawerService
+  ) {}
 
   ngOnInit() {
     if( window.innerWidth <= 768 ){
@@ -18,6 +22,10 @@ export class NavbarComponent implements OnInit {
 
   toggleSidebar() {
     this.sidebarService.toggleSidebar();
+  }
+
+  toggleDrawer() {
+    this.drawerService.toggleDrawer();
   }
   
 }

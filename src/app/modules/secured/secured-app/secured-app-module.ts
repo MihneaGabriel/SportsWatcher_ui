@@ -4,12 +4,14 @@ import { SecuredAppComponent } from "./containers/secured-app-page/secured-app.c
 import { SecuredAppRoutingModule } from "./secured-app-routing-module";
 import { NavbarComponent } from "./containers/navbar/navbar.component";
 import { SidebarComponent } from "./containers/sidebar/sidebar.component";
+import { DrawerComponent } from "./containers";
 
 @NgModule({
   declarations: [
     SecuredAppComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    DrawerComponent
   ],
   imports: [
     CommonModule,

@@ -28,7 +28,18 @@
   cursor: pointer;
 }
 
-.toggle-btn:hover {
+.toggle-drawer-btn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+}
+
+.toggle-btn:hover, .toggle-drawer-btn:hover {
   color: #b0b0b0; 
 }
 

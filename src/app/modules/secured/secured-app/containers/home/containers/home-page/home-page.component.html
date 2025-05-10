@@ -1,1 +1,37 @@
-<p>home-page works!</p>
+<div class="home-container" [class.shifted]="isSidebarOpen">
+
+  <div class="import-data-container">
+    <div class="import-data">
+      <h2>Import Data</h2>
+      <p class="description">
+        You can pull data from other accounts or activity trackers from your watch into <strong>Watcher</strong>.
+      </p>
+      <hr class="divider" />
+    
+      <div class="import-info">
+        <p>You can import:</p>
+        <ul class="import-ul">
+          <li>Garmin Activity Files (.tcx, .fit or .gpx format)</li>
+          <li>Fitbit® body or activity data (.xls, .xlsx or .csv format)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TODO Add functionality of the real dropzone -->
+    <div class="upload-box">
+      <i class="fas fa-download download-icon"></i>
+      <p>MOCK Upload your data...</p>
+    </div>
+
+    <button class="import-button">MOCK Import Data</button>
+
+    <!-- TODO Add links -->
+    <div class="links">
+      <a href="#">Learn more about importing activity files</a><br />
+      <a href="#">Learn more about importing Fitbit data</a><br />
+      <a href="#">Data and Privacy</a>
+    </div>
+  </div>
+
+</div>
+
