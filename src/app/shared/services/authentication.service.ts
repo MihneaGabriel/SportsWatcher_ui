@@ -17,6 +17,9 @@ export class AuthenticationService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
+  private username = new BehaviorSubject<string>(null);
+  username$ = this.username.asObservable();
+  
   constructor(
     @Inject(RUNTIME_CONFIG) private env: () => IRuntimeConfig,
     private httpClient: HttpClient
@@ -24,9 +27,9 @@ export class AuthenticationService {
     AuthenticationService.BASE_PATH = `${this.env().apiUrl}${AuthenticationService.BASE_PATH}`;
   }
 
-  login(data: LoginForm): Observable<LoginForm> {
+  login(data: LoginForm): Observable<any> {
     console.log('Login data:', JSON.stringify(data, null, 2));
-    return this.httpClient.post<LoginForm>(`${AuthenticationService.BASE_PATH}/GetUser`, data).pipe(
+    return this.httpClient.post<any>(`${AuthenticationService.BASE_PATH}/GetUser`, data).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMessage = 'Something went wrong.';
         
@@ -38,6 +41,11 @@ export class AuthenticationService {
         return throwError(() => new Error(errorMessage));
       })
     );
+  }
+
+  setLogin(name: string ){
+    localStorage.setItem('username', name );
+    this.username.next(name);
   }
 
   register(data: RegisterForm): Observable<RegisterForm> {

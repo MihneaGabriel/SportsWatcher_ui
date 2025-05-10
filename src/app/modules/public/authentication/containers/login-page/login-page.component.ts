@@ -4,7 +4,6 @@ import { AuthRoutes, SecuredAppRoutes } from 'src/app/routes';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
-
 @Component({
   selector: 'sportwatcher-login-page',
   templateUrl: './login-page.component.html',
@@ -38,9 +37,8 @@ export class LoginPageComponent implements OnInit {
 
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.getRawValue()).subscribe({
-        next: (response) => {
-          console.log('Login successful:', response);
-            // Navigate to the secured app route on successful login
+        next: (data) => {
+            this.loginService.setLogin(data.username);
             this.router.navigate([this.homeRoutes.Home.root.url]);
         },
         error: (err) => {
