@@ -3,6 +3,7 @@ import { Inject, Injectable } from "@angular/core";
 import { BehaviorSubject, catchError, map, Observable, of, Subject, throwError } from "rxjs";
 import { LoginForm } from "src/app/modules/public/authentication/containers/models/login.model";
 import { RegisterForm } from "src/app/modules/public/authentication/containers/models/register.model";
+import { User } from "src/app/modules/public/authentication/containers/models/user.model";
 import { IRuntimeConfig } from "src/libs/models/runtime-config.model";
 import { RUNTIME_CONFIG } from "src/libs/utils/runtime-config.utils";
 
@@ -17,8 +18,8 @@ export class AuthenticationService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
-  private username = new BehaviorSubject<string>(null);
-  username$ = this.username.asObservable();
+  private userStorage = new BehaviorSubject<User>(null);
+  userStorage$ = this.userStorage.asObservable();
   
   constructor(
     @Inject(RUNTIME_CONFIG) private env: () => IRuntimeConfig,
@@ -43,9 +44,11 @@ export class AuthenticationService {
     );
   }
 
-  setLogin(name: string ){
-    localStorage.setItem('username', name );
-    this.username.next(name);
+  setLogin(user: User ){
+    localStorage.setItem('username', user.username);
+    localStorage.setItem('id', user.id.toString());
+    this.userStorage.next(user);
+
   }
 
   register(data: RegisterForm): Observable<RegisterForm> {

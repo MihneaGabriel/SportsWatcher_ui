@@ -17,13 +17,15 @@
       </div>
     </div>
 
-    <!-- TODO Add functionality of the real dropzone -->
-    <div class="upload-box">
-      <i class="fas fa-download download-icon"></i>
-      <p>MOCK Upload your data...</p>
-    </div>
+    <app-dropzone #dropzone (dropzoneData)="receiveData($event)"></app-dropzone>
 
-    <button class="import-button">MOCK Import Data</button>
+    <button 
+      class="import-button" 
+      [disabled]="!fileData?.isValid"
+      (click)="openImportModal()"
+    >
+      Import Data
+    </button>
 
     <!-- TODO Add links -->
     <div class="links">
