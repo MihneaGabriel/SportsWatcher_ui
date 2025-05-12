@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthRoutes, SecuredAppRoutes } from 'src/app/routes';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'sportwatcher-login-page',
@@ -38,7 +39,12 @@ export class LoginPageComponent implements OnInit {
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.getRawValue()).subscribe({
         next: (data) => {
-            this.loginService.setLogin(data.username);
+            const user: User = {
+              id: data.userId,
+              username: data.username,
+            };
+
+            this.loginService.setLogin(user);
             this.router.navigate([this.homeRoutes.Home.root.url]);
         },
         error: (err) => {
