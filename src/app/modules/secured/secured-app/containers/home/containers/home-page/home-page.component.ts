@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { SidebarService } from 'src/app/shared/services/sidebar.service';
 import { DropzoneData } from '../../models/dropzone.model';
 import { MatDialog } from '@angular/material/dialog';
@@ -28,12 +27,12 @@ export class HomePageComponent implements OnInit {
 
   receiveData(event: DropzoneData){
     this.fileData = event;
-    console.log(this.fileData)
   }
 
   openImportModal() {
     this.dialog.open(ImportModalComponent, {
       width: '400px',
+      data: this.fileData
     })
   }
 }
