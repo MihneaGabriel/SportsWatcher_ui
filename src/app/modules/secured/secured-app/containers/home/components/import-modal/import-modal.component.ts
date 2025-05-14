@@ -17,6 +17,9 @@ export class ImportModalComponent implements OnInit {
   userId : number;
   categories: Nomenclature[] = [];
   selectedCategoryId: number;
+  loading = false;
+  importSuccess = false;
+  importError = false;
   
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DropzoneData,
@@ -36,6 +39,10 @@ export class ImportModalComponent implements OnInit {
       return;
     }
   
+    this.loading = true;
+    this.importSuccess = false;
+    this.importError = false;
+
     const formData = new FormData();
     formData.append('file', this.data.fileName); 
     formData.append('userId', this.userId.toString());
@@ -44,9 +51,13 @@ export class ImportModalComponent implements OnInit {
     this.artificialIntelService.upload(formData).subscribe({
       next: (response) => {
         console.log('Upload successful:', response);
+        this.loading = false;
+        this.importSuccess = true;
       },
       error: (err) => {
         console.error('Upload failed:', err);
+        this.loading = false;
+        this.importError = true;
       }
     });
   }

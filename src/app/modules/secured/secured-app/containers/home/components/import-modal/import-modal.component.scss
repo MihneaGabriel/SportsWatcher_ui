@@ -40,6 +40,64 @@
     right: 12px;
     transform: translateY(-50%);
     color: #666;
-    pointer-events: none; // so it doesn't block the select click
+    pointer-events: none; 
   }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 1.5rem;
+  text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
+
+  p {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #444;
+  }
+}
+
+.success-icon, .error-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 1.5rem;
+  text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.success-icon {
+  color: #4CAF50; 
+}
+
+.success-icon .fa-check-circle, .error-icon .fa-exclamation-circle{
+  font-size: 46px; 
+  margin-right: 8px;
+  margin-bottom: 12px;
+}
+
+.error-icon {
+  color: #f44336; 
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+::ng-deep .mat-mdc-progress-spinner circle {
+  stroke: #1976d2 !important; 
 }

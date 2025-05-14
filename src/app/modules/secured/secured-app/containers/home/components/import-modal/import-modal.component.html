@@ -7,19 +7,41 @@
     </p>
   </div>
 
-  <div class="select-wrapper">
-    <label for="category">Sport Category</label>
-    <select id="category" [(ngModel)]="selectedCategoryId" name="category">
-      <option value="" disabled selected>Select your sport category</option>
-      <option 
-        *ngFor="let category of categories" 
-        [value]="category.id">
-        {{ category.value }}
-      </option>
-    </select>
-    <i class="fa-solid fa-chevron-down select-arrow"></i>
+  <div *ngIf="loading" class="loading-container">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="50"
+      strokeWidth="4"
+      ></mat-progress-spinner>
+    <p>Uploading and analyzing data...</p>
   </div>
-  
+
+  <div *ngIf="!loading">
+    <div class="select-wrapper" *ngIf="!importSuccess && !importError">
+      <label for="category">Sport Category</label>
+      <select id="category" [(ngModel)]="selectedCategoryId" name="category">
+        <option value="" disabled selected>Select your sport category</option>
+        <option 
+          *ngFor="let category of categories" 
+          [value]="category.id">
+          {{ category.value }}
+        </option>
+      </select>
+      <i class="fa-solid fa-chevron-down select-arrow"></i>
+    </div>  
+
+    <!-- Show success or error icon after loading -->
+    <div *ngIf="importSuccess" class="success-icon">
+      <i class="fas fa-check-circle"></i>
+      <span>Upload successful!</span>
+    </div>
+
+    <div *ngIf="importError" class="error-icon">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>Upload failed. Please try again.</span>
+    </div>
+  </div>
+
   
   <mat-divider></mat-divider>
 
@@ -38,7 +60,7 @@
         mat-raised-button 
         color="primary" 
         (click)="confirmImport()" 
-        *ngIf="selectedCategoryId"
+        *ngIf="selectedCategoryId && !importSuccess && !importError"
       >
         Import
       </button>
