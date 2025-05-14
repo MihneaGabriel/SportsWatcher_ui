@@ -6,6 +6,9 @@ import { DropzoneComponent } from './components/dropzone/dropzone.component';
 import { ImportModalComponent } from './components/import-modal/import-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FormsModule } from '@angular/forms';
 
 const declarations = [
   HomePageComponent,
@@ -20,6 +23,9 @@ const declarations = [
     HomeRoutingModule,
     MatDialogModule,
     MatButtonModule,
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    FormsModule,
   ],
 })
 export class HomeModule {}

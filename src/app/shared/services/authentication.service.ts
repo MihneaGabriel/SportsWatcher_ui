@@ -48,7 +48,6 @@ export class AuthenticationService {
     localStorage.setItem('username', user.username);
     localStorage.setItem('id', user.id.toString());
     this.userStorage.next(user);
-
   }
 
   register(data: RegisterForm): Observable<RegisterForm> {

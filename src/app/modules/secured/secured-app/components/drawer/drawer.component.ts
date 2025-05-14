@@ -12,10 +12,8 @@ export class DrawerComponent implements OnInit {
   username: string;
   isDrawerOpen = false;
 
-
   constructor( 
     private drawerService: DrawerService,
-    private userService: AuthenticationService
    ) {}
   
   ngOnInit() {
