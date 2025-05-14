@@ -31,7 +31,7 @@ export class HomePageComponent implements OnInit {
 
   openImportModal() {
     this.dialog.open(ImportModalComponent, {
-      width: '400px',
+      width: '700px',
       data: this.fileData
     })
   }

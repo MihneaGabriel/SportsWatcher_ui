@@ -1,8 +1,45 @@
-<h2 mat-dialog-title>MOCK Import CSV Data</h2>
-    <mat-dialog-content>
-      <p>Confirm you want to import the selected CSV file?</p>
-    </mat-dialog-content>
-    <mat-dialog-actions>
+<h2 mat-dialog-title>Import FitBit/Garmin DATA</h2>
+<mat-dialog-content>
+  <div class="import-info">
+    <p>
+      It looks like you're uploading Fitbit or Garmin data. To help us display it correctly, 
+      please let us know which <b>sport category</b> the data belongs to.
+    </p>
+  </div>
+
+  <div class="select-wrapper">
+    <label for="category">Sport Category</label>
+    <select id="category" [(ngModel)]="selectedCategoryId" name="category">
+      <option value="" disabled selected>Select your sport category</option>
+      <option 
+        *ngFor="let category of categories" 
+        [value]="category.id">
+        {{ category.value }}
+      </option>
+    </select>
+    <i class="fa-solid fa-chevron-down select-arrow"></i>
+  </div>
+  
+  
+  <mat-divider></mat-divider>
+
+  <div class="import-footer">
+    <small>
+      On days when Garmin and Fitbit data overlap, Garmin data will take priority. Fitbit Activity Minutes 
+      will be shown as Garmin Intensity Minutes. If you upload files with overlapping dates, the most 
+      recent upload will replace the previous data.
+    </small>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
       <button mat-button mat-dialog-close>Cancel</button>
-      <button mat-raised-button color="primary" (click)="confirmImport()">Import</button>
+      <button 
+        mat-raised-button 
+        color="primary" 
+        (click)="confirmImport()" 
+        *ngIf="selectedCategoryId"
+      >
+        Import
+      </button>
 </mat-dialog-actions>

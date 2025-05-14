@@ -24,4 +24,9 @@ export class NomenclatureService {
     )
   }
 
+  getCategories(): Observable<Nomenclature[]> {
+    return this.httpClient.get<Nomenclature[]>(`${NomenclatureService.BASE_PATH}/GetAllCategories`).pipe(
+      catchError( () => of([] as Nomenclature[]) )
+    )
+  }
 }

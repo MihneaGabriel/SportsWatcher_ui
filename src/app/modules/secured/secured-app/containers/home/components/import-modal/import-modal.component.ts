@@ -1,6 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DropzoneData } from '../../models/dropzone.model';
+import { NomenclatureService } from 'src/libs/services/nomenclature/nomenclature.service';
+import { Nomenclature } from 'src/libs/models/nomenclator.model';
+import { lastValueFrom } from 'rxjs';
+import { AiResponse } from '../../models/ai-response.model';
+import { ArtificialIntelService } from '../../services/ai.service';
 
 @Component({
   selector: 'app-import-modal',
@@ -8,15 +13,42 @@ import { DropzoneData } from '../../models/dropzone.model';
   styleUrl: './import-modal.component.scss',
   standalone: false,
 })
-export class ImportModalComponent {
+export class ImportModalComponent implements OnInit {
+  userId : number;
+  categories: Nomenclature[] = [];
+  selectedCategoryId: number;
   
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DropzoneData) {
-    console.log('Received file data:', data);
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DropzoneData,
+    private nomenclatureService: NomenclatureService,
+    private artificialIntelService: ArtificialIntelService
+  ) {
+    this.userId = Number(localStorage.getItem('id'));
+  }
+
+  async ngOnInit() {
+    this.categories = await lastValueFrom(this.nomenclatureService.getCategories())
   }
   
+  async confirmImport(): Promise<void> {
+    if (!this.data.fileName || !this.userId || !this.selectedCategoryId) {
+      console.error('Missing required parameters for import');
+      return;
+    }
   
+    const formData = new FormData();
+    formData.append('file', this.data.fileName); 
+    formData.append('userId', this.userId.toString());
+    formData.append('categoryId', this.selectedCategoryId.toString());
   
-  confirmImport() {
-    console.log('Mock import action')
+    this.artificialIntelService.upload(formData).subscribe({
+      next: (response) => {
+        console.log('Upload successful:', response);
+      },
+      error: (err) => {
+        console.error('Upload failed:', err);
+      }
+    });
   }
+
 }

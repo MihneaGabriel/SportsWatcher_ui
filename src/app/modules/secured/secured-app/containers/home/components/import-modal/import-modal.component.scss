@@ -1,0 +1,45 @@
+.import-info p {
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.import-footer small {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  select {
+    width: 100%;
+    padding: 10px 40px 10px 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #fff;
+    appearance: none;
+    outline: none;
+  }
+
+  .select-arrow {
+    position: absolute;
+    top: 60%;
+    right: 12px;
+    transform: translateY(-50%);
+    color: #666;
+    pointer-events: none; // so it doesn't block the select click
+  }
+}
