@@ -1,4 +1,42 @@
 <div class="sports-container" [class.shifted]="isSidebarOpen">
 
-  <p>sports-page works!</p>
+  <div class="category-data-container">
+    <div class="category-data">
+      <h2>Sport analytics</h2>
+
+      <div class="select-wrapper">
+        <label for="category">Choose Your Path to Discovery:</label>
+        <select id="category" [(ngModel)]="selectedCategoryId" name="category" (change)="onCategoryChange()">
+          <option value="" disabled selected>Select your sport category</option>
+          <option 
+            *ngFor="let category of categories" 
+            [value]="category.id">
+            {{ category.value }}
+          </option>
+        </select>
+      </div>
+
+      <hr class="divider" />
+    </div>
+
+    <div *ngIf="selectedCategoryId" class="category-details">
+      <h3>{{ selectedCategory }} Details</h3>
+      @switch(selectedCategoryId) {
+        @case(5) {
+          <p>Here's some analysis and insights on running.</p>
+        }
+        @case(6) {
+          <p>Here's some analysis and insights on swimming.</p>
+          <app-swimming-session> </app-swimming-session>
+        }
+        @case(7) {
+          <p>Here's some analysis and insights on cycling.</p>
+        }
+        @default {
+          <p>Here's some analysis and insights on {{ selectedCategory }}.</p>
+        }
+      }
+    </div>
+
+  </div>
 </div>

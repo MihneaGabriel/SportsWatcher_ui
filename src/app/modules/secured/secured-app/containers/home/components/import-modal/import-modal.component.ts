@@ -4,8 +4,7 @@ import { DropzoneData } from '../../models/dropzone.model';
 import { NomenclatureService } from 'src/libs/services/nomenclature/nomenclature.service';
 import { Nomenclature } from 'src/libs/models/nomenclator.model';
 import { lastValueFrom } from 'rxjs';
-import { AiResponse } from '../../models/ai-response.model';
-import { ArtificialIntelService } from '../../services/ai.service';
+import { ArtificialIntelService } from '../../../services/ai.service';
 
 @Component({
   selector: 'app-import-modal',

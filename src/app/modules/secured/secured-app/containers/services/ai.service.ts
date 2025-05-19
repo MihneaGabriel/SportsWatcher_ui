@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@angular/core";
 import { catchError, Observable, Subject, throwError } from "rxjs";
-import { AiResponse } from "../models/ai-response.model";
+import { AiResponse } from "../home/models/ai-response.model";
 import { RUNTIME_CONFIG } from "src/libs/utils/runtime-config.utils";
 import { IRuntimeConfig } from "src/libs/models/runtime-config.model";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
@@ -27,4 +27,14 @@ export class ArtificialIntelService {
       })
     );
   }
+
+  getAiResponse(userId: number, categoryId: number): Observable<any> {
+    return this.httpClient.get<any>(`${ArtificialIntelService.BASE_PATH}/GetAiResponse?userId=${userId}&categoryId=${categoryId}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching AI response:', error);
+        return throwError(() => new Error("Something went wrong while fetching AI response."));
+      })
+    );
+  }
 }
+
