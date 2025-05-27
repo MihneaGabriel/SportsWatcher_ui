@@ -67,7 +67,19 @@
   }
 }
 
+.session-date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #475569; 
+  margin-bottom: 0.5rem;
 
+  i {
+    color: #0ea5e9;
+    font-size: 1rem;
+  }
+}
 
 .session-section {
   margin-top: 1rem;

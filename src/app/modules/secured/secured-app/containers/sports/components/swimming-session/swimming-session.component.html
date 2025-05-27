@@ -1,7 +1,13 @@
 <div class="session-grid" *ngFor="let session of parsedSessions">
   <div class="session-card">
     <header class="session-header">
-      <h2><i class="fa-solid fa-person-swimming"></i> Swimming Session</h2>
+      <h2><i class="fa-solid fa-person-swimming"></i> Swimming Session </h2>
+      
+      <div class="session-date" *ngIf="session.createdAt">
+        <i class="fa-regular fa-calendar"></i>
+        {{ session.createdAt | date: 'dd-MM-yyyy' }}
+      </div>
+
       <span class="badge" *ngIf="session.total_distance">{{ session.total_distance / 1000 }} km</span>
       <button class="toggle-btn" (click)="toggleExpand(session)">
         {{ session.expanded ? 'Hide Details' : 'Show Details' }}

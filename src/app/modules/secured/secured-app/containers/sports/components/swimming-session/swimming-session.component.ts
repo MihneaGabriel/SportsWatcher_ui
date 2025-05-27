@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataset, ChartOptions } from 'chart.js';
+import { AiSession } from '../../models/ai-session.model';
+import { c } from '@angular/material/dialog.d-B5HZULyo';
 
 @Component({
   selector: 'app-swimming-session',
@@ -8,7 +10,7 @@ import { ChartDataset, ChartOptions } from 'chart.js';
   standalone: false,
 })
 export class SwimmingSessionComponent implements OnInit {
-  @Input() session: any; // Expecting an array of { jsonResponse: string }
+  @Input() session: AiSession[]= []; 
 
   parsedSessions: any[] = [];
 
@@ -37,14 +39,13 @@ export class SwimmingSessionComponent implements OnInit {
           ...parsed,
           expanded: false,
           heartRateChart: this.createHeartRateChart(parsed),
+          createdAt: new Date(entry.createdAt),
         };
       } catch (e) {
         console.warn('Invalid JSON in entry:', entry);
         return null;
       }
     }).filter(Boolean);
-
-    console.log('Parsed sessions:', this.parsedSessions);
   }
 
   toggleExpand(session: any) {
