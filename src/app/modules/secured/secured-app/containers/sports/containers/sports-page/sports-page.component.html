@@ -10,7 +10,7 @@
           <option value="" disabled selected>Select your sport category</option>
           <option 
             *ngFor="let category of categories" 
-            [value]="category.id">
+            [ngValue]="category.id">
             {{ category.value }}
           </option>
         </select>
@@ -27,7 +27,7 @@
         }
         @case(6) {
           <p>Here's some analysis and insights on swimming.</p>
-          <app-swimming-session> </app-swimming-session>
+          <app-swimming-session *ngIf="aiResponses" [session]="aiResponses" /> 
         }
         @case(7) {
           <p>Here's some analysis and insights on cycling.</p>

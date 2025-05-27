@@ -49,15 +49,9 @@ export class SportsPageComponent implements OnInit {
       return;
     }
 
-
     this.artificialIntelService.getAiResponse(userId, categoryId).subscribe({
       next: (data) => {
         this.aiResponses = data;
-
-         
-        console.log('UserId:', this.userId);
-        console.log('Selected category:', this.selectedCategoryId);
-        console.log('aiResponses', this.aiResponses);
       },
       error: (err) => {
         console.error('Error fetching AI response:', err);
