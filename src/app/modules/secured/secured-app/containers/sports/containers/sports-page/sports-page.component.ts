@@ -39,6 +39,7 @@ export class SportsPageComponent implements OnInit {
   onCategoryChange() {
     const selected = this.categories.find(cat => cat.id == this.selectedCategoryId);
     this.selectedCategory = selected ? selected.value : '';
+    this.aiResponses = null; 
 
     this.getAiResponse(this.userId ,this.selectedCategoryId) 
   }

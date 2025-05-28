@@ -24,6 +24,7 @@
       @switch(selectedCategoryId) {
         @case(5) {
           <p>Here's some analysis and insights on running.</p>
+          <app-running-session *ngIf="aiResponses" [session]="aiResponses" />
         }
         @case(6) {
           <p>Here's some analysis and insights on swimming.</p>

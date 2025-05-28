@@ -1,0 +1,87 @@
+<div class="session-grid" *ngFor="let session of parsedSessions">
+  <div class="session-card">
+    <header class="session-header">
+      <h2><i class="fa-solid fa-person-running"></i> Running Session</h2>
+      
+      <div class="session-date" *ngIf="session.createdAt">
+        <i class="fa-regular fa-calendar"></i>
+        {{ session.createdAt | date: 'dd-MM-yyyy' }}
+      </div>
+
+      <span class="badge" *ngIf="session.total_distance">{{ (session.total_distance / 1000) | number:'1.2-2' }} km</span>
+      <button class="toggle-btn" (click)="toggleExpand(session)">
+        {{ session.expanded ? 'Hide Details' : 'Show Details' }}
+      </button>
+    </header>
+
+    <div class="expandable" [class.expanded]="session.expanded">
+
+      <!-- Summary Stats -->
+      <div class="session-section">
+        <h3>Summary</h3>
+        <div class="session-metrics">
+          <div *ngIf="session.total_distance"><strong>Total Distance:</strong> {{ session.total_distance }} m</div>
+          <div *ngIf="session.average_pace"><strong>Average Pace:</strong> {{ session.average_pace }} sec/km</div>
+          <div *ngIf="session.total_duration"><strong>Total Duration:</strong> {{ session.total_duration }} sec</div>
+        </div>
+      </div>
+
+      <!-- Heart Rate & Cadence -->
+      <div class="session-section" *ngIf="session.average_heart_rate || session.average_cadence">
+        <h3>Heart Rate & Cadence</h3>
+        <div class="session-metrics">
+          <div *ngIf="session.average_heart_rate"><strong>Average Heart Rate:</strong> {{ session.average_heart_rate }} bpm</div>
+          <div *ngIf="session.average_cadence"><strong>Average Cadence:</strong> {{ session.average_cadence }} steps/min</div>
+        </div>
+      </div>
+
+      <!-- Splits -->
+      <div class="session-section" *ngIf="session.splitsChart">
+        <h3>Splits Chart</h3>
+        <div class="session-chart">
+          <canvas
+            baseChart
+            [data]="session.splitsChart"
+            [options]="chartOptions"
+            [type]="'line'">
+          </canvas>
+        </div>
+      </div>
+
+
+      <!-- Segments -->
+      <div class="session-section" *ngIf="session.warm_up || session.peak || session.cool_down">
+        <h3>Segments</h3>
+        <ul>
+          <li *ngIf="session.warm_up"><strong>Warm Up:</strong> {{ session.warm_up.start_time }}s - {{ session.warm_up.end_time }}s, Pace: {{ session.warm_up.pace }} sec/km</li>
+          <li *ngIf="session.peak"><strong>Peak:</strong> {{ session.peak.start_time }}s - {{ session.peak.end_time }}s, Pace: {{ session.peak.pace }} sec/km</li>
+          <li *ngIf="session.cool_down"><strong>Cool Down:</strong> {{ session.cool_down.start_time }}s - {{ session.cool_down.end_time }}s, Pace: {{ session.cool_down.pace }} sec/km</li>
+        </ul>
+      </div>
+
+      <!-- Terrain Impact -->
+      <div class="session-section" *ngIf="session.terrain_impact">
+        <h3>Terrain Impact</h3>
+        <div *ngIf="session.terrain_impact.elevation_gain"><strong>Elevation Gain:</strong> {{ session.terrain_impact.elevation_gain }} m</div>
+        <div *ngIf="session.terrain_impact.average_gradient"><strong>Average Gradient:</strong> {{ session.terrain_impact.average_gradient }} %</div>
+      </div>
+
+      <!-- Performance Trends -->
+      <div class="session-section" *ngIf="session.performance_trends">
+        <h3>Performance Trends</h3>
+        <div *ngIf="session.performance_trends.acceleration"><strong>Acceleration:</strong> {{ session.performance_trends.acceleration }}</div>
+        <div *ngIf="session.performance_trends.fatigue"><strong>Fatigue:</strong> {{ session.performance_trends.fatigue }}</div>
+        <div *ngIf="session.performance_trends.recovery"><strong>Recovery:</strong> {{ session.performance_trends.recovery }}</div>
+      </div>
+
+      <!-- Suggestions -->
+      <div class="session-section" *ngIf="session.suggestions?.length">
+        <h3>Suggestions</h3>
+        <ul>
+          <li *ngFor="let suggestion of session.suggestions">{{ suggestion }}</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
