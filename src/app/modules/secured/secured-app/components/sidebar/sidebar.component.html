@@ -4,13 +4,27 @@
     <div class="logo">
       <span>SportsWatcher</span>
     </div>
-      <!-- TODO Add functionality -->
-      <div class="sidebar-content">
-        <ul>
-          <li><a href="#">Mock</a></li>
-          <li><a href="#">Mock</a></li>
-          <li><a href="#">Log Out</a></li>
-        </ul>
+
+    <!-- TODO Add functionality -->
+    <div class="sidebar-content">
+      <ul>
+        <li>
+          <a [routerLink]="'/app/sports'">
+            <i class="fa-solid fa-person-running"></i> Sports
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="'/app/home'">
+            <i class="fa-solid fa-database"></i> Import Data
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="'/auth/login'">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+        </li>
+      </ul>
     </div>
+
   </div>
 </div>

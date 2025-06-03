@@ -1,0 +1,106 @@
+<div class="session-grid" *ngFor="let session of parsedSessions">
+  <div class="session-card">
+    <header class="session-header">
+      <h2><i class="fa-solid fa-person-swimming"></i> Swimming Session </h2>
+      
+      <div class="session-date" *ngIf="session.createdAt">
+        <i class="fa-regular fa-calendar"></i>
+        {{ session.createdAt | date: 'dd-MM-yyyy' }}
+      </div>
+
+      <span class="badge" *ngIf="session.total_distance">{{ session.total_distance / 1000 }} km</span>
+      <button class="toggle-btn" (click)="toggleExpand(session)">
+        {{ session.expanded ? 'Hide Details' : 'Show Details' }}
+      </button>
+    </header>
+
+    <div class="expandable" [class.expanded]="session.expanded">
+
+      <!-- Overview -->
+      <div class="session-section">
+        <h3>Overview</h3>
+        <div class="session-metrics">
+          <div *ngIf="session.total_time"><strong>Total Time:</strong> {{ session.total_time }} sec</div>
+          <div *ngIf="session.average_pace"><strong>Avg Pace:</strong> {{ session.average_pace }} sec / 100m</div>
+          <div *ngIf="session.best_pace"><strong>Best Pace:</strong> {{ session.best_pace }} sec / 100m</div>
+        </div>
+      </div>
+
+      <!-- Heart Rate Trends -->
+      <div class="session-section" *ngIf="session.heart_rate_trends?.length">
+        <h3>Heart Rate Trends</h3>
+
+        <!-- List -->
+        <ul>
+          <li *ngFor="let hr of session.heart_rate_trends">
+            {{ hr.time_point }}s: {{ hr.heart_rate }} bpm
+          </li>
+        </ul>
+
+        <!-- Chart -->
+        <div class="session-chart" *ngIf="session.heartRateChart">
+          <canvas
+            baseChart
+            [data]="session.heartRateChart"
+            [options]="chartOptions"
+            [type]="'line'">
+          </canvas>
+        </div>
+      </div>
+
+
+      <!-- Rest Periods -->
+      <div class="session-section" *ngIf="session.rest_periods?.length">
+        <h3>Rest Periods</h3>
+        <table class="rest-table">
+          <thead>
+            <tr>
+              <th>Start Time (s)</th>
+              <th>End Time (s)</th>
+              <th>Duration (s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rest of session.rest_periods">
+              <td>{{ rest.start_time }}</td>
+              <td>{{ rest.end_time }}</td>
+              <td>{{ rest.duration }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <!-- Stroke Consistency -->
+      <div class="session-section" *ngIf="session.stroke_consistency">
+        <h3>Stroke Consistency</h3>
+        <table class="stroke-table">
+          <tr>
+            <th>Average Cadence</th>
+            <td>{{ session.stroke_consistency.average_cadence }} spm</td>
+          </tr>
+          <tr>
+            <th>Variability</th>
+            <td>{{ session.stroke_consistency.variability }}%</td>
+          </tr>
+        </table>
+      </div>
+
+
+      <!-- Performance Summary -->
+      <div class="session-section" *ngIf="session.performance_summary">
+        <h3>Performance Summary</h3>
+        <div><strong>Start:</strong> {{ session.performance_summary.start }}</div>
+        <div><strong>Middle:</strong> {{ session.performance_summary.middle }}</div>
+        <div><strong>End:</strong> {{ session.performance_summary.end }}</div>
+      </div>
+
+      <!-- Technique Suggestions -->
+      <div class="session-section" *ngIf="session.technique_suggestions">
+        <h3>Technique Suggestions</h3>
+        <p>{{ session.technique_suggestions }}</p>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -51,6 +51,14 @@ export class HomeRoutes {
 }
 //endregion
 
+export class SportRoutes {
+    static readonly root: AppRoute = {
+        path: 'sports',
+        url: '/app/sports',
+        name: 'Sports'
+    };
+}
+
 //#region Secured Routes
 // Secured routes are used for pages that require authentication and authorization.
 export class SecuredAppRoutes {
@@ -61,5 +69,6 @@ export class SecuredAppRoutes {
     };
 
     static readonly Home = HomeRoutes;
+    static readonly Sport = SportRoutes
 }
 //endregion

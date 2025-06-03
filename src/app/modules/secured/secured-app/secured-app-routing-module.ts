@@ -18,6 +18,13 @@ const routes = () => [
           loadChildren: () => import('./containers/home/home.module').then(m => m.HomeModule),
         })),
 
+      on(app.Sport.root)
+        .when((r) => checkForPermissionOrRoles(r.roles, r.permissions))
+        .define((r) => ({
+          path: r.path,
+          loadChildren: () => import('./containers/sports/sports.module').then(m => m.SportsModule),
+        })),
+
       on('**')
       .when(() => true)
       .define(() => ({

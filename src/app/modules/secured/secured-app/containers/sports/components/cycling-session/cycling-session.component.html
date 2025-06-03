@@ -1,0 +1,100 @@
+<div class="session-grid" *ngFor="let session of parsedSessions">
+  <div class="session-card">
+    <header class="session-header">
+      <h2><i class="fa-solid fa-person-biking"></i> Cycling Session</h2>
+
+      <div class="session-date" *ngIf="session.createdAt">
+        <i class="fa-regular fa-calendar"></i>
+        {{ session.createdAt | date: 'dd-MM-yyyy' }}
+      </div>
+
+      <span class="badge" *ngIf="session.total_distance">
+        {{ (session.total_distance) | number:'1.2-2' }} km
+      </span>
+      <button class="toggle-btn" (click)="toggleExpand(session)">
+        {{ session.expanded ? 'Hide Details' : 'Show Details' }}
+      </button>
+    </header>
+
+    <div class="expandable" [class.expanded]="session.expanded">
+
+      <!-- Summary Stats -->
+      <div class="session-section">
+        <h3>Summary</h3>
+        <div class="session-metrics">
+          <div *ngIf="session.total_distance"><strong>Total Distance:</strong> {{ session.total_distance }} km</div>
+          <div *ngIf="session.total_moving_time"><strong>Moving Time:</strong> {{ session.total_moving_time }} min</div>
+          <div *ngIf="session.average_speed"><strong>Average Speed:</strong> {{ session.average_speed }} km/h</div>
+          <div *ngIf="session.average_max_speed"><strong>Max Speed:</strong> {{ session.average_max_speed }} km/h</div>
+        </div>
+      </div>
+
+      <!-- Power & Climb -->
+      <div class="session-section">
+        <h3>Power & Climb</h3>
+        <div class="session-metrics">
+          <div *ngIf="session.average_power_output"><strong>Average Power Output:</strong> {{ session.average_power_output }} W</div>
+          <div *ngIf="session.highest_climb_altitude_gain"><strong>Altitude Gain:</strong> {{ session.highest_climb_altitude_gain }} m</div>
+        </div>
+      </div>
+
+      <!-- Heart Rate & Cadence -->
+      <div class="session-section" *ngIf="session.average_heart_rate || session.average_cadence">
+        <h3>Heart Rate & Cadence</h3>
+        <div class="session-metrics">
+          <div *ngIf="session.average_heart_rate"><strong>Average Heart Rate:</strong> {{ session.average_heart_rate }} bpm</div>
+          <div *ngIf="session.average_cadence"><strong>Average Cadence:</strong> {{ session.average_cadence }} rpm</div>
+        </div>
+      </div>
+
+      <!-- High Effort Periods -->
+      <div class="session-section" *ngIf="session.effortChart">
+        <h3>High Effort Periods</h3>
+        <div class="session-chart">
+          <canvas
+            baseChart
+            [data]="session.effortChart"
+            [options]="chartOptions"
+            [type]="'bar'">
+          </canvas>
+        </div>
+      </div>
+
+
+      <!-- Steepest Segments -->
+      <div class="session-section" *ngIf="session.segments_with_steepest_grades_and_speed_drop?.length">
+        <h3>Steepest Segments</h3>
+        <div class="table-wrapper">
+          <table class="session-table">
+            <thead>
+              <tr>
+                <th>Start Time (min)</th>
+                <th>End Time (min)</th>
+                <th>Grade (%)</th>
+                <th>Speed Drop (km/h)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let segment of session.segments_with_steepest_grades_and_speed_drop">
+                <td>{{ segment.start_time }}</td>
+                <td>{{ segment.end_time }}</td>
+                <td>{{ segment.grade }}</td>
+                <td>{{ segment.speed_drop }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <!-- Suggestions -->
+      <div class="session-section" *ngIf="session.suggestions?.length">
+        <h3>Suggestions</h3>
+        <ul>
+          <li *ngFor="let suggestion of session.suggestions">{{ suggestion }}</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>

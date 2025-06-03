@@ -3,3 +3,16 @@
   background-color: #E5E5E5;
   min-height: 100vh; 
 }
+
+.home-container {
+  transition: margin-left 0.3s ease;
+  margin-left: 0;
+
+  &.shifted {
+    margin-left: 250px;
+
+    @media (max-width: 768px) {
+      margin-left: 100px; 
+    }
+  }
+}
