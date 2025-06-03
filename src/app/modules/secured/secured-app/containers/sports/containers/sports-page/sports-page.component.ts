@@ -4,7 +4,6 @@ import { SidebarService } from 'src/app/shared/services/sidebar.service';
 import { Nomenclature } from 'src/libs/models/nomenclator.model';
 import { NomenclatureService } from 'src/libs/services/nomenclature/nomenclature.service';
 import { ArtificialIntelService } from '../../../services/ai.service';
-import { c } from '@angular/material/dialog.d-B5HZULyo';
 
 @Component({
   selector: 'app-sports-page',

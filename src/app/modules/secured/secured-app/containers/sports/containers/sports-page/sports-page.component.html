@@ -32,6 +32,7 @@
         }
         @case(7) {
           <p>Here's some analysis and insights on cycling.</p>
+          <app-cycling-session *ngIf="aiResponses" [session]="aiResponses" />
         }
         @default {
           <p>Here's some analysis and insights on {{ selectedCategory }}.</p>

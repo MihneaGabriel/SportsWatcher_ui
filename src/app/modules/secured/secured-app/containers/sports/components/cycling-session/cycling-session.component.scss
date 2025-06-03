@@ -11,7 +11,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   padding: 1.5rem;
   transition: transform 0.2s ease;
-  border-left: 5px solid #c75b02;
+  border-left: 5px solid #6bc702;
 
   &:hover {
     transform: translateY(-4px);
@@ -30,8 +30,8 @@
   }
 
   .badge {
-    background: #feefe0;
-    color: #c75b02;
+    background: #ebfee0;
+    color: #6bc702;
     padding: 0.25rem 0.75rem;
     border-radius: 12px;
     font-weight: bold;
@@ -51,14 +51,14 @@
   opacity: 1;
 
   scrollbar-width: thin;
-  scrollbar-color: #feefe0 transparent;
+  scrollbar-color: #ebfee0 transparent;
 
   &::-webkit-scrollbar {
     width: 6px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #feefe0;
+    background-color: #ebfee0;
     border-radius: 4px;
   }
 
@@ -76,7 +76,7 @@
   margin-bottom: 0.5rem;
 
   i {
-    color: #c75b02;
+    color: #6bc702;
     font-size: 1rem;
   }
 }
@@ -87,7 +87,7 @@
   h3 {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
-    color: #c75b02;
+    color: #6bc702;
   }
 
   .session-metrics {
@@ -109,7 +109,7 @@
     }
 
     th {
-      background-color: #feefe0;
+      background-color: #ebfee0;
       font-weight: bold;
     }
   }
@@ -127,17 +127,17 @@
 }
 
 .toggle-btn {
-  background: #feefe0;
+  background: #ebfee0;
   border: none;
   padding: 0.4rem 0.75rem;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
-  color: #c75b02;
+  color: #6bc702;
   transition: background 0.2s;
 
   &:hover {
-    background: #feefe0;
+    background: #ebfee0;
   }
 }
 

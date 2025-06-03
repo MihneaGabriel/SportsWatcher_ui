@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AiSession } from '../../models/ai-session.model';
-import { ChartData, ChartDataset, ChartOptions } from 'chart.js';
+import { ChartDataset, ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'app-running-session',

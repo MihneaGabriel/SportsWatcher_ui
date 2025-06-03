@@ -5,8 +5,9 @@ import { SportsPageComponent } from './containers/sports-page/sports-page.compon
 import { FormsModule } from '@angular/forms';
 import { SwimmingSessionComponent } from './components/swimming-session/swimming-session.component';
 import { BaseChartDirective } from 'ng2-charts';
-import { CategoryScale, Chart, Filler, Legend, LinearScale, LineController, LineElement, PointElement, Title, Tooltip } from 'chart.js';
+import { BarController, BarElement, CategoryScale, Chart, Filler, Legend, LinearScale, LineController, LineElement, PointElement, Title, Tooltip } from 'chart.js';
 import { RunningSessionComponent } from './components/running-session/running-session.component';
+import { CyclingSessionComponent } from './components/cycling-session/cycling-session.component';
 
 Chart.register(
   Filler,
@@ -15,6 +16,8 @@ Chart.register(
   PointElement,
   LinearScale,
   Title,
+  BarController,
+  BarElement,
   CategoryScale,
   Tooltip,
   Legend
@@ -24,6 +27,7 @@ const declarations = [
   SportsPageComponent,
   SwimmingSessionComponent,
   RunningSessionComponent,
+  CyclingSessionComponent,
 ];
 
 @NgModule({
